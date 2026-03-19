@@ -106,25 +106,12 @@ Pak je pripoj do karty jako `min_entity` a `max_entity`.
 
 - `decimals` ovlivnuje zobrazeni, ne vnitrni hodnotu odesilanou do Home Assistant.
 - Pokud se karta po instalaci nezobrazi, udelej hard refresh prohlizece a zkontroluj resource URL.
-- Pro HACS update workflow je publikovany release tag `v0.1.0`.
+- Pro HACS update workflow je publikovany release tag `v0.1.1`.
 
 ## Repo
 
 - GitHub: `https://github.com/Peta01/HystSlider`
-- Release: `https://github.com/Peta01/HystSlider/releases/tag/v0.1.0`# Hyst Slider Card (HACS)
-
-Lovelace custom karta pro Home Assistant s dvojitym sliderem (2 palce) na jedne ose.
-
-Pouziti: nastaveni minimalni a maximalni teploty (hystereze) pro:
-
-- dve cisla (`input_number` nebo `number`)
-- jednu `climate` entitu (`target_temp_low` + `target_temp_high`)
-
-## Co umi
-
-- Dva palce: `Min` a `Max`
-- Odesila hodnoty do Home Assistant pres `set_value`
-- Podpora climate rozsahu pres `climate.set_temperature`
+- Release: `https://github.com/Peta01/HystSlider/releases/tag/v0.1.1`
 - Bere rozsah a krok z entity atributu (`min`, `max`, `step`) nebo z konfigurace karty
 - Funguje i s vlastnim servisem pres `set_service`
 - Mushroom-like vzhled: ikona, subtitle, jemna animace a gradientni karta
