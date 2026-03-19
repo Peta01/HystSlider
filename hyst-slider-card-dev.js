@@ -1,4 +1,4 @@
-class HystSliderCard extends HTMLElement {
+class HystSliderCardDev extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -656,15 +656,16 @@ class HystSliderCard extends HTMLElement {
   }
 }
 
-if (!customElements.get("hyst-slider-card")) {
-  customElements.define("hyst-slider-card", HystSliderCard);
+if (!customElements.get("hyst-slider-card-dev")) {
+  customElements.define("hyst-slider-card-dev", HystSliderCardDev);
 }
 
 window.customCards = window.customCards || [];
-if (!window.customCards.find((card) => card.type === "hyst-slider-card")) {
+if (!window.customCards.find((card) => card.type === "hyst-slider-card-dev")) {
   window.customCards.push({
-    type: "hyst-slider-card",
-    name: "Hysteresis Slider Card",
-    description: "Dual-thumb slider card for minimum and maximum temperature.",
+    type: "hyst-slider-card-dev",
+    name: "Hysteresis Slider Card Dev",
+    description: "Development build of dual-thumb slider card for minimum and maximum temperature.",
   });
 }
+
