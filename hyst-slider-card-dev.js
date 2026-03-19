@@ -20,6 +20,11 @@ class HystSliderCardDev extends HTMLElement {
     this._config = {
       title: "Teplotni rozsah",
       subtitle: "",
+      subtitle_entity: null,
+      subtitle_attribute: null,
+      subtitle_prefix: "",
+      subtitle_suffix: "",
+      subtitle_unit: null,
       icon: "mdi:thermometer-lines",
       min_label: "Min",
       max_label: "Max",
@@ -395,6 +400,48 @@ class HystSliderCardDev extends HTMLElement {
     return `${Number(value).toFixed(this._getDecimals())} ${unit}`;
   }
 
+  _resolveSubtitle(defaultSubtitle) {
+    const fallback = this._config.subtitle || defaultSubtitle;
+    const subtitleEntityId = this._config.subtitle_entity;
+
+    if (!subtitleEntityId) {
+      return fallback;
+    }
+
+    const subtitleEntity = this._getEntity(subtitleEntityId);
+    if (!subtitleEntity) {
+      return fallback;
+    }
+
+    let value;
+    if (this._config.subtitle_attribute) {
+      value = subtitleEntity.attributes?.[this._config.subtitle_attribute];
+    } else {
+      value = subtitleEntity.state;
+    }
+
+    if (
+      value === undefined ||
+      value === null ||
+      value === "unknown" ||
+      value === "unavailable"
+    ) {
+      return fallback;
+    }
+
+    const unit =
+      this._config.subtitle_unit ||
+      subtitleEntity.attributes?.unit_of_measurement ||
+      "";
+
+    const valueText = unit ? `${value} ${unit}` : `${value}`;
+    const customSubtitle = `${this._config.subtitle_prefix || ""}${valueText}${
+      this._config.subtitle_suffix || ""
+    }`.trim();
+
+    return customSubtitle || fallback;
+  }
+
   _resolveClimateValues(sliderMin, sliderMax) {
     const climate = this._getEntity(this._config.climate_entity);
     const attrs = climate?.attributes || {};
@@ -582,7 +629,7 @@ class HystSliderCardDev extends HTMLElement {
     );
 
     this._elements.title.textContent = this._config.title;
-    this._elements.subtitle.textContent = secondaryText;
+    this._elements.subtitle.textContent = this._resolveSubtitle(secondaryText);
     this._elements.icon.icon = this._config.icon;
 
     this._elements.minSlider.min = String(sliderMin);

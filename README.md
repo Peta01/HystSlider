@@ -43,6 +43,8 @@ Poznamka: cast `HystSlider` v URL musi odpovidat nazvu GitHub repozitare.
 type: custom:hyst-slider-card
 title: Teplotni hystereze
 subtitle: Kotel - rozsah
+subtitle_entity: sensor.kotel_power
+subtitle_prefix: Vykon 
 icon: mdi:radiator
 min_entity: input_number.temp_min
 max_entity: input_number.temp_max
@@ -82,6 +84,11 @@ V climate rezimu karta vola:
 - `climate_entity`: povinne pro Climate rezim
 - `title`: nadpis karty, default `Teplotni rozsah`
 - `subtitle`: sekundarni text pod nadpisem
+- `subtitle_entity`: entita, ze ktere se bere hodnota do subtitle
+- `subtitle_attribute`: atribut z `subtitle_entity` (pokud nechces `state`)
+- `subtitle_prefix`: text pred hodnotou subtitle
+- `subtitle_suffix`: text za hodnotou subtitle
+- `subtitle_unit`: vynucene jednotky pro subtitle (jinak se bere z entity)
 - `icon`: MDI ikona vlevo v headeru
 - `min_label`: popisek leve hodnoty, default `Min`
 - `max_label`: popisek prave hodnoty, default `Max`
