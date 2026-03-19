@@ -45,6 +45,7 @@ max_entity: input_number.temp_max
 min: 15
 max: 30
 step: 0.5
+decimals: 0
 unit: "°C"
 min_label: Min
 max_label: Max
@@ -61,6 +62,7 @@ climate_entity: climate.loznice
 min: 17
 max: 27
 step: 0.5
+decimals: 0
 accent_color: "#f28b30"
 ```
 
@@ -82,6 +84,7 @@ V climate rezimu karta vola:
 - `min` (volitelne): minimum slideru
 - `max` (volitelne): maximum slideru
 - `step` (volitelne): krok slideru
+- `decimals` (volitelne): pocet desetinnych mist pro zobrazeni, default `0`
 - `unit` (volitelne): jednotka, default z entity nebo `°C`
 - `accent_color` (volitelne): barva aktivni casti slideru
 - `set_service` (volitelne): vlastni service ve formatu `domain.service` (pouze Number rezim)

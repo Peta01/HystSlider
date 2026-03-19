@@ -23,6 +23,7 @@ class HystSliderCard extends HTMLElement {
       icon: "mdi:thermometer-lines",
       min_label: "Min",
       max_label: "Max",
+      decimals: 0,
       min: null,
       max: null,
       step: null,
@@ -382,8 +383,16 @@ class HystSliderCard extends HTMLElement {
     return Boolean(this._config?.climate_entity);
   }
 
+  _getDecimals() {
+    const decimals = Number(this._config?.decimals);
+    if (Number.isInteger(decimals) && decimals >= 0) {
+      return decimals;
+    }
+    return 0;
+  }
+
   _format(value, unit) {
-    return `${Number(value).toFixed(1)} ${unit}`;
+    return `${Number(value).toFixed(this._getDecimals())} ${unit}`;
   }
 
   _resolveClimateValues(sliderMin, sliderMax) {
