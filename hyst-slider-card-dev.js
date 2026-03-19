@@ -34,6 +34,7 @@ class HystSliderCardDev extends HTMLElement {
       step: null,
       unit: null,
       accent_color: null,
+      track_gradient: null,
       ...config,
     };
 
@@ -170,8 +171,7 @@ class HystSliderCardDev extends HTMLElement {
 
         .slider-wrap {
           position: relative;
-          padding-top: 8px;
-          height: 40px;
+          height: 46px;
           display: flex;
           align-items: center;
           z-index: 1;
@@ -181,9 +181,37 @@ class HystSliderCardDev extends HTMLElement {
           position: absolute;
           left: 0;
           right: 0;
-          height: 8px;
-          border-radius: 99px;
-          background: var(--divider-color);
+          height: 20px;
+          border-radius: 6px;
+          background: var(--hyst-track-gradient);
+          overflow: hidden;
+          box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
+        }
+
+        .track-dim {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.58);
+          pointer-events: none;
+          transition: width 60ms linear;
+        }
+
+        .track-dim-left {
+          left: 0;
+        }
+
+        .track-dim-right {
+          right: 0;
+        }
+
+        .track-gloss {
+          position: absolute;
+          inset: 0 0 auto 0;
+          height: 45%;
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent);
+          pointer-events: none;
+          z-index: 3;
         }
 
         input[type="range"] {
@@ -204,8 +232,26 @@ class HystSliderCardDev extends HTMLElement {
           background: transparent;
         }
 
+        input[type="range"] {
+          -webkit-appearance: none;
+          appearance: none;
+          pointer-events: none;
+          position: absolute;
+          left: 0;
+          right: 0;
+          width: 100%;
+          margin: 0;
+          height: 20px;
+          background: transparent;
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+          height: 20px;
+          background: transparent;
+        }
+
         input[type="range"]::-moz-range-track {
-          height: 8px;
+          height: 20px;
           background: transparent;
         }
 
@@ -213,50 +259,32 @@ class HystSliderCardDev extends HTMLElement {
           -webkit-appearance: none;
           appearance: none;
           pointer-events: all;
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
+          width: 14px;
+          height: 30px;
+          border-radius: 5px;
           border: 2px solid rgba(255, 255, 255, 0.95);
-          background: var(--hyst-slider-accent, var(--primary-color));
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+          background: rgba(255, 255, 255, 0.88);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
           cursor: pointer;
-          margin-top: -7px;
+          margin-top: -5px;
           transition: transform 120ms ease;
         }
 
         input[type="range"]::-webkit-slider-thumb:active {
-          transform: scale(1.08);
+          transform: scaleY(1.12);
         }
 
         input[type="range"]::-moz-range-thumb {
           pointer-events: all;
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
+          width: 14px;
+          height: 30px;
+          border-radius: 5px;
           border: 2px solid rgba(255, 255, 255, 0.95);
-          background: var(--hyst-slider-accent, var(--primary-color));
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+          background: rgba(255, 255, 255, 0.88);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
           cursor: pointer;
           transition: transform 120ms ease;
         }
-
-        .limit-row {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 6px;
-          font-size: 0.75rem;
-          opacity: 0.72;
-          position: relative;
-          z-index: 1;
-        }
-      </style>
-      <ha-card>
-        <div class="top-gloss"></div>
-        <div class="header">
-          <div class="header-left">
-            <span class="icon-wrap"><ha-icon id="card-icon"></ha-icon></span>
-            <div class="text-wrap">
-              <h3 class="title"></h3>
               <div class="subtitle" id="subtitle"></div>
             </div>
           </div>
@@ -266,7 +294,11 @@ class HystSliderCardDev extends HTMLElement {
           </div>
         </div>
         <div class="slider-wrap">
-          <div class="track" id="track"></div>
+          <div class="track" id="track">
+            <div class="track-dim track-dim-left" id="track-left"></div>
+            <div class="track-dim track-dim-right" id="track-right"></div>
+            <div class="track-gloss"></div>
+          </div>
           <input id="min-slider" type="range" />
           <input id="max-slider" type="range" />
         </div>
@@ -282,6 +314,8 @@ class HystSliderCardDev extends HTMLElement {
       subtitle: this.shadowRoot.getElementById("subtitle"),
       icon: this.shadowRoot.getElementById("card-icon"),
       track: this.shadowRoot.getElementById("track"),
+      trackLeft: this.shadowRoot.getElementById("track-left"),
+      trackRight: this.shadowRoot.getElementById("track-right"),
       minSlider: this.shadowRoot.getElementById("min-slider"),
       maxSlider: this.shadowRoot.getElementById("max-slider"),
       minValue: this.shadowRoot.getElementById("min-value"),
@@ -478,12 +512,8 @@ class HystSliderCardDev extends HTMLElement {
     const minPct = ((minVal - sliderMin) / span) * 100;
     const maxPct = ((maxVal - sliderMin) / span) * 100;
 
-    this._elements.track.style.background = `linear-gradient(
-      to right,
-      var(--divider-color) 0% ${minPct}%,
-      var(--hyst-slider-accent, var(--primary-color)) ${minPct}% ${maxPct}%,
-      var(--divider-color) ${maxPct}% 100%
-    )`;
+    this._elements.trackLeft.style.width = `${minPct}%`;
+    this._elements.trackRight.style.width = `${100 - maxPct}%`;
   }
 
   _onInput(type) {
@@ -626,6 +656,12 @@ class HystSliderCardDev extends HTMLElement {
     this.style.setProperty(
       "--hyst-slider-accent",
       this._config.accent_color || "var(--state-climate-heat-color, var(--primary-color))"
+    );
+    const defaultGradient =
+      "linear-gradient(to right, #1565C0, #1E88E5, #00ACC1, #43A047, #FDD835, #FB8C00, #E53935)";
+    this.style.setProperty(
+      "--hyst-track-gradient",
+      this._config.track_gradient || defaultGradient
     );
 
     this._elements.title.textContent = this._config.title;
