@@ -1,0 +1,8 @@
+{
+  "name": "Hyst Slider Card",
+  "content_in_root": true,
+  "filename": "hyst-slider-card.js",
+  "type": "frontend",
+  "homeassistant": "2023.8.0",
+  "render_readme": true
+}
