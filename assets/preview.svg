@@ -1,0 +1,50 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="116" y1="92" x2="1117" y2="662" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#131A24"/>
+      <stop offset="1" stop-color="#1E2633"/>
+    </linearGradient>
+    <linearGradient id="cardGlow" x1="316" y1="188" x2="937" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF9B54" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#5AA8FF" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="range" x1="386" y1="397" x2="891" y2="397" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF8A3D"/>
+      <stop offset="1" stop-color="#FFB14A"/>
+    </linearGradient>
+    <filter id="shadow" x="246" y="140" width="788" height="452" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="22"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0235294 0 0 0 0 0.0470588 0 0 0 0 0.0823529 0 0 0 0.4 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1079" cy="136" r="160" fill="#FF7A18" fill-opacity="0.08"/>
+  <circle cx="189" cy="611" r="192" fill="#4F8DFF" fill-opacity="0.07"/>
+  <g filter="url(#shadow)">
+    <rect x="290" y="166" width="700" height="364" rx="28" fill="#1E2531"/>
+    <rect x="290" y="166" width="700" height="364" rx="28" fill="url(#cardGlow)"/>
+    <rect x="290.75" y="166.75" width="698.5" height="362.5" rx="27.25" stroke="white" stroke-opacity="0.08" stroke-width="1.5"/>
+  </g>
+  <rect x="318" y="194" width="56" height="56" rx="18" fill="white" fill-opacity="0.08"/>
+  <path d="M350.5 204C343.596 204 338 209.596 338 216.5V232.75C338 239.654 343.596 245.25 350.5 245.25C357.404 245.25 363 239.654 363 232.75V216.5C363 209.596 357.404 204 350.5 204ZM350.5 210.25C353.953 210.25 356.75 213.047 356.75 216.5V226.552C354.941 225.414 352.802 224.75 350.5 224.75C348.198 224.75 346.059 225.414 344.25 226.552V216.5C344.25 213.047 347.047 210.25 350.5 210.25ZM350.5 251.5C345.322 251.5 341.125 247.303 341.125 242.125C341.125 236.947 345.322 232.75 350.5 232.75C355.678 232.75 359.875 236.947 359.875 242.125C359.875 247.303 355.678 251.5 350.5 251.5Z" fill="#FF9F4A"/>
+  <text x="392" y="219" fill="white" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Teplotni hystereze</text>
+  <text x="392" y="251" fill="white" fill-opacity="0.6" font-family="Segoe UI, Arial, sans-serif" font-size="17">heating • aktualne 22 °C</text>
+  <rect x="792" y="199" width="84" height="38" rx="19" fill="white" fill-opacity="0.08"/>
+  <rect x="886" y="199" width="84" height="38" rx="19" fill="white" fill-opacity="0.08"/>
+  <text x="812" y="223" fill="white" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">Min 19 °C</text>
+  <text x="903" y="223" fill="white" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">Max 24 °C</text>
+  <rect x="386" y="392" width="505" height="10" rx="5" fill="white" fill-opacity="0.12"/>
+  <rect x="525" y="392" width="231" height="10" rx="5" fill="url(#range)"/>
+  <circle cx="525" cy="397" r="16" fill="#FF9A47" stroke="white" stroke-width="4"/>
+  <circle cx="756" cy="397" r="16" fill="#FF9A47" stroke="white" stroke-width="4"/>
+  <text x="386" y="450" fill="white" fill-opacity="0.55" font-family="Segoe UI, Arial, sans-serif" font-size="16">15 °C</text>
+  <text x="862" y="450" fill="white" fill-opacity="0.55" font-family="Segoe UI, Arial, sans-serif" font-size="16">30 °C</text>
+  <text x="290" y="618" fill="white" fill-opacity="0.8" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">Dual-thumb Lovelace card for min/max temperature control</text>
+  <text x="290" y="652" fill="white" fill-opacity="0.5" font-family="Segoe UI, Arial, sans-serif" font-size="18">Number helpers and climate target_temp_low / target_temp_high supported</text>
+</svg>
