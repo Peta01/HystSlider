@@ -223,24 +223,6 @@ class HystSliderCardDev extends HTMLElement {
           right: 0;
           width: 100%;
           margin: 0;
-          height: 8px;
-          background: transparent;
-        }
-
-        input[type="range"]::-webkit-slider-runnable-track {
-          height: 8px;
-          background: transparent;
-        }
-
-        input[type="range"] {
-          -webkit-appearance: none;
-          appearance: none;
-          pointer-events: none;
-          position: absolute;
-          left: 0;
-          right: 0;
-          width: 100%;
-          margin: 0;
           height: 20px;
           background: transparent;
         }
@@ -285,6 +267,24 @@ class HystSliderCardDev extends HTMLElement {
           cursor: pointer;
           transition: transform 120ms ease;
         }
+
+        .limit-row {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 6px;
+          font-size: 0.75rem;
+          opacity: 0.72;
+          position: relative;
+          z-index: 1;
+        }
+      </style>
+      <ha-card>
+        <div class="top-gloss"></div>
+        <div class="header">
+          <div class="header-left">
+            <span class="icon-wrap"><ha-icon id="card-icon"></ha-icon></span>
+            <div class="text-wrap">
+              <h3 class="title"></h3>
               <div class="subtitle" id="subtitle"></div>
             </div>
           </div>
@@ -323,6 +323,12 @@ class HystSliderCardDev extends HTMLElement {
       leftLimit: this.shadowRoot.getElementById("left-limit"),
       rightLimit: this.shadowRoot.getElementById("right-limit"),
     };
+
+    if (!this._elements.minSlider || !this._elements.maxSlider) {
+      // eslint-disable-next-line no-console
+      console.error("hyst-slider-card-dev: slider elements not found while building card");
+      return;
+    }
 
     this._elements.minSlider.addEventListener("input", () => this._onInput("min"));
     this._elements.maxSlider.addEventListener("input", () => this._onInput("max"));
