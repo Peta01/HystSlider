@@ -16,7 +16,8 @@ Pouziti:
 - Number rezim pro `input_number` a `number`
 - Climate rezim pro `climate.set_temperature`
 - Mushroom-like vzhled s ikonou, subtitle a zvyraznenym rozsahem
-- konfigurovatelny `step`, `decimals`, `accent_color`, `icon`, `subtitle`
+- obdelnikovy gradientni track (gauge-like, rovny)
+- konfigurovatelny `step`, `decimals`, `accent_color`, `track_gradient`, `icon`, `subtitle`
 - automaticke cteni `min`, `max`, `step` a jednotek z atributu entity
 
 ## Instalace pres HACS
@@ -56,6 +57,7 @@ unit: "°C"
 min_label: Min
 max_label: Max
 accent_color: "#ce6b45"
+track_gradient: "linear-gradient(to right, #00BCD4, #FF5722)"
 ```
 
 ### Varianta B: climate entita
@@ -98,6 +100,7 @@ V climate rezimu karta vola:
 - `decimals`: pocet desetinnych mist pro zobrazeni, default `0`
 - `unit`: jednotka, default z entity nebo `°C`
 - `accent_color`: barva aktivni casti slideru
+- `track_gradient`: vlastni CSS gradient pro obdelnikovy track
 - `set_service`: vlastni service ve formatu `domain.service` pro Number rezim
 
 ## Doporuceny setup helperu
@@ -114,24 +117,6 @@ Pak je pripoj do karty jako `min_entity` a `max_entity`.
 - `decimals` ovlivnuje zobrazeni, ne vnitrni hodnotu odesilanou do Home Assistant.
 - Pokud se karta po instalaci nezobrazi, udelej hard refresh prohlizece a zkontroluj resource URL.
 - Pro HACS update workflow pouzivej posledni release tag.
-
-## DEV test vedle stable
-
-Od release `v0.1.8` HACS distribuuje oba custom elementy z jednoho souboru `hyst-slider-card.js`.
-
-Postup v Home Assistant:
-
-1. Ponech standardni HACS resource:
-
-```yaml
-url: /hacsfiles/HystSlider/hyst-slider-card.js
-type: module
-```
-
-2. Produkcni dashboard pouzivej s typem `custom:hyst-slider-card`.
-3. Test dashboard pouzivej s typem `custom:hyst-slider-card-dev`.
-
-Neni potreba pridavat druhy `/local` resource ani kopirovat dev soubor do `config/www/`.
 
 ## Repo
 
