@@ -2,7 +2,7 @@
 
 Dual-thumb Lovelace karta pro Home Assistant, ktera na jedne ose nastavuje dve hodnoty: minimum a maximum teploty.
 
-![Hyst Slider Card preview](https://raw.githubusercontent.com/Peta01/HystSlider/main/assets/preview.svg)
+![Hyst Slider Card preview](https://raw.githubusercontent.com/Peta01/HystSlider/main/assets/preview.png)
 
 Pouziti:
 
