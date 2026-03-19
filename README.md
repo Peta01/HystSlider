@@ -113,34 +113,27 @@ Pak je pripoj do karty jako `min_entity` a `max_entity`.
 
 - `decimals` ovlivnuje zobrazeni, ne vnitrni hodnotu odesilanou do Home Assistant.
 - Pokud se karta po instalaci nezobrazi, udelej hard refresh prohlizece a zkontroluj resource URL.
-- Pro HACS update workflow je publikovany release tag `v0.1.3`.
+- Pro HACS update workflow pouzivej posledni release tag.
 
 ## DEV test vedle stable
 
-Pokud chces testovat novy branch bez rizika pro funkcni verzi, pouzij oddelenou dev kartu.
-
-Tento repozitar obsahuje:
-
-- stable soubor: `hyst-slider-card.js` s typem `custom:hyst-slider-card`
-- dev soubor: `hyst-slider-card-dev.js` s typem `custom:hyst-slider-card-dev`
+Od release `v0.1.8` HACS distribuuje oba custom elementy z jednoho souboru `hyst-slider-card.js`.
 
 Postup v Home Assistant:
 
-1. Ponech stable resource beze zmen.
-2. Pridej druhy resource pro dev build:
+1. Ponech standardni HACS resource:
 
 ```yaml
-url: /local/hyst-slider-card-dev.js?v=1
+url: /hacsfiles/HystSlider/hyst-slider-card.js
 type: module
 ```
 
-3. Nahraj `hyst-slider-card-dev.js` do `config/www/`.
-4. Vytvor test dashboard kartu s typem `custom:hyst-slider-card-dev`.
-5. Produkcni dashboard nech na `custom:hyst-slider-card`.
+2. Produkcni dashboard pouzivej s typem `custom:hyst-slider-card`.
+3. Test dashboard pouzivej s typem `custom:hyst-slider-card-dev`.
 
-Pri kazde zmene dev souboru zvys query parametr, napr. `?v=2`, aby se obesla cache prohlizece.
+Neni potreba pridavat druhy `/local` resource ani kopirovat dev soubor do `config/www/`.
 
 ## Repo
 
 - GitHub: `https://github.com/Peta01/HystSlider`
-- Release: `https://github.com/Peta01/HystSlider/releases/tag/v0.1.3`
+- Release: `https://github.com/Peta01/HystSlider/releases/latest`
